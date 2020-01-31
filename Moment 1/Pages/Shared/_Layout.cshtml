@@ -1,0 +1,62 @@
+﻿@{ 
+    var dateToday = DateTime.Now.ToString("yyyy/MM/dd");
+    string active = ViewData["Title"].ToString();
+}
+<!DOCTYPE html>
+<html lang="se">
+<head>
+    <title>Moment 1 - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/hca5jjp.css">
+    <script src="https://kit.fontawesome.com/f02302bbd8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <a href="/"><img src="~/images/logo.png" /></a>
+        </div>
+        <div id="datestamp">
+            <p>Dagens datum är: @dateToday</p>
+        </div>
+        <span id="hamburgmenu" onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </span>
+        <span id="closebtn" onclick="closeNav()">
+            <i class="fas fa-times"></i>
+        </span>
+    </header>
+    <div class="container">
+        <nav id="mySidenav">
+            <ul>
+                <!--En kontroll görs för att kolla vilken sida användaren befinner sig på för att kunna lägga en class=active på den i navigeringen-->
+                @if (active == "Start")
+                {
+                    <li class="active"><a href="/">Startsida</a></li>
+                    <li><a href="/Razor">Razor</a></li>
+                    <li><a href="/About">Om sidan</a></li>
+                }
+                else if (active == "Razor")
+                {
+                    <li><a href="/">Startsida</a></li>
+                    <li  class="active"><a href="/Razor">Razor</a></li>
+                    <li><a href="/About">Om sidan</a></li>
+                }
+                else
+                {
+                    <li><a href="/">Startsida</a></li>
+                    <li><a href="/Razor">Razor</a></li>
+                    <li class="active"><a href="/About">Om sidan</a></li>
+                }
+            </ul>
+        </nav>
+
+        <div class="main">
+            @RenderBody()
+        </div>
+        <footer>
+            <p>Av Malin Larsson - Kontakta mig via e-post: <a href="mailto: mala1812@student.miun.se">mala1812@student.miun.se</a></p>
+        </footer>
+    </div>
+    <script src="~/js/main.js"></script>
+</body>
+</html>
